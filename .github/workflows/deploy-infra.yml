@@ -3,13 +3,16 @@ on: [push]
 jobs:
   terraform-deployment:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
     steps:
       # EXPORT THE CREDENTIALS
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::839895325100:role/github-actions-oidc
           aws-region: "eu-central-1"
 
       - name: Clone/Checkout your repository code
