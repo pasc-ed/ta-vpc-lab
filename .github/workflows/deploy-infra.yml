@@ -23,3 +23,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
+
+      - name: Apply the changes
+        run: terraform apply -auto-approve
